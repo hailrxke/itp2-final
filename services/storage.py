@@ -21,3 +21,8 @@ def save_raw_data(data: list) -> bool:
     except Exception as e:
         print(f"Recording Error: {e}")
         return False
+
+def add_transaction_to_storage(transaction_dict: dict):
+    current_data = load_raw_data()
+    current_data.append(transaction_dict)
+    save_raw_data(current_data)
