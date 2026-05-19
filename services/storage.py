@@ -26,3 +26,14 @@ def add_transaction_to_storage(transaction_dict: dict):
     current_data = load_raw_data()
     current_data.append(transaction_dict)
     save_raw_data(current_data)
+
+def get_transactions_by_category() -> dict:
+    transactions = load_raw_data()
+    category_map = {}
+    for t in transactions:
+        cat = t.get("category", "income")
+        if cat not in category_map:
+            category_map[cat] = []
+        category_map[cat].append(t)
+    return category_map
+
