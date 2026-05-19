@@ -20,8 +20,8 @@ class Income(Transaction):
             raise ValueError(...)
         super().__init__(amount, category)
 
-    def apply(self, amount, account: Account):
-        account.deposit(amount)
+    def apply(self, account: Account):
+        account.deposit(self.amount)
 
 
 class Expence(Transaction):
@@ -30,5 +30,5 @@ class Expence(Transaction):
             raise ValueError(...)
         super().__init__(amount, category)
 
-    def apply(self, amount, account: Account):
-        account.withdraw(amount)
+    def apply(self, account: Account):
+        account.withdraw(self.amount)
