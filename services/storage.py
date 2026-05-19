@@ -11,3 +11,13 @@ def load_raw_data() -> list:
             return json.load(f)
     except (json.JSONDecodeError, FileNotFoundError):
         return []
+
+def save_raw_data(data: list) -> bool:
+    try:
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+        with open(DB_PATH, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        return True
+    except Exception as e:
+        print(f"Recording Error: {e}")
+        return False
