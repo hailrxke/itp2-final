@@ -1,13 +1,14 @@
 from abc import abstractmethod, ABC
-from account import Account
+# from models.account import Account
 from datetime import datetime
 
 
 class Transaction(ABC):
-    def __init__(self, amount, category):
+    def __init__(self, amount, category, account: "Account"):
         self.amount = amount
         self.date = datetime.now()
         self.category = category
+        self.account = account
 
     @abstractmethod
     def apply(self):
@@ -15,20 +16,20 @@ class Transaction(ABC):
 
 
 class Income(Transaction):
-    def __init__(self, amount, category):
+    def __init__(self, amount, category, account: "Account"):
         if amount < 0:
             raise ValueError(...)
-        super().__init__(amount, category)
+        super().__init__(amount, category, account)
 
-    def apply(self, account: Account):
-        account.deposit(self.amount)
+    def apply(self):
+        self.account.deposit(self.amount)
 
 
-class Expence(Transaction):
-    def __init__(self, amount, category):
-        if amount > 0:
+class Expense(Transaction):
+    def __init__(self, amount, category, account: "Account"):
+        if amount < 0:
             raise ValueError(...)
-        super().__init__(amount, category)
+        super().__init__(amount, category, account)
 
-    def apply(self, account: Account):
-        account.withdraw(self.amount)
+    def apply(self):
+        self.account.withdraw(self.amount)
