@@ -1,13 +1,25 @@
+from models.transactions import Transaction
+
+
 class Account:
     def __init__(self, balance):
-        self.balance = balance
+        self.__balance = balance
+        self.__categories = []
+        self.__transactions = []
 
     def deposit(self, amount):
         if amount < 0:
             raise ValueError(...)
-        self.balance += amount
+        self.__balance += amount
 
     def withdraw(self, amount):
-        if amount > 0:
+        if amount < 0:
             raise ValueError(...)
-        self.balance -= amount
+        self.__balance -= amount
+
+    def get_balance(self):
+        return self.__balance
+
+    def add_transaction(self, transaction: Transaction):
+        transaction.apply()
+        self.__transactions.append(Transaction)
