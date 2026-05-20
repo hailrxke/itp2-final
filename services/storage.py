@@ -37,3 +37,6 @@ def get_transactions_by_category() -> dict:
         category_map[cat].append(t)
     return category_map
 
+def get_unique_categories() -> set:
+    transactions = load_raw_data()
+    return {t["category"] for t in transactions if t.get("type") == "expense"}
