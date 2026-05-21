@@ -88,7 +88,7 @@ def validate_transaction_payload(
         raise ValueError(f"Missing required fields: {', '.join(missing)}.")
 
     validated: Dict[str, Any] = {
-        "amount": validate_amount(payload["amount"]),
+        "amount": float(validate_amount(payload["amount"])),
         "category": validate_category(payload["category"], allowed_categories),
         "type": validate_transaction_type(payload["type"]),
     }
