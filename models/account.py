@@ -1,4 +1,5 @@
 from models.transactions import Transaction
+from models.categories import Category
 
 
 class Account:
@@ -20,6 +21,15 @@ class Account:
     def get_balance(self):
         return self.__balance
 
+    def get_transactions(self):
+        return self.__transactions
+
     def add_transaction(self, transaction: Transaction):
         transaction.apply()
         self.__transactions.append(Transaction)
+
+    def get_categories(self):
+        return self.__categories
+
+    def add_category(self, category: Category):
+        self.__categories.append(category)
