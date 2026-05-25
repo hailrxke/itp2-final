@@ -6,7 +6,7 @@ from models.interface import Accountable
 class Account(Accountable):
     def __init__(self, balance):
         self.__balance = balance
-        self.__categories = []
+        self.__categories = {}
         self.__transactions = []
 
     def deposit(self, amount):
@@ -33,4 +33,4 @@ class Account(Accountable):
         return self.__categories
 
     def add_category(self, category: Category):
-        self.__categories.append(category)
+        self.__categories[category.get_name()] = category

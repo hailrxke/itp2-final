@@ -3,6 +3,15 @@ import os
 
 DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'transactions.json')
 
+import json
+import os
+
+from models.account import Account
+from models.categories import Category
+from models.transactions import Income, Expense
+
+DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'transactions.json')
+
 def load_raw_data() -> list:
     if not os.path.exists(DB_PATH):
         return []
@@ -11,3 +20,13 @@ def load_raw_data() -> list:
             return json.load(f)
     except (json.JSONDecodeError, FileNotFoundError):
         return []
+
+def load_account_transactions(account: Account) -> None:
+    for transaction in load_raw_data():
+        account.add_category(Category(transaction.get('category'), 0))
+        if transaction.get('type') == 'income':
+            account.add_transaction(Income(transaction.get('amount'), account))
+        elif transaction.get('type') == 'expanse':
+            account.add_transaction(Expense(transaction.get('amount'), account.get_categories()[transaction.get('category')], account))
+
+

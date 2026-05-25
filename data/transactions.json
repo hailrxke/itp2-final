@@ -1,0 +1,92 @@
+[
+    {
+        "amount": 41898,
+        "category": "stipend",
+        "type": "income",
+        "date": "2026-01-12"
+    },
+    {
+        "amount": 4500,
+        "category": "food",
+        "type": "expense",
+        "date": "2026-01-15"
+    },
+    {
+        "amount": 90,
+        "category": "transport",
+        "type": "expense",
+        "date": "2026-01-16"
+    },
+    {
+        "amount": 15000,
+        "category": "freelance",
+        "type": "income",
+        "date": "2026-01-20"
+    },
+    {
+        "amount": 12000,
+        "category": "entertainment",
+        "type": "expense",
+        "date": "2026-01-25"
+    },
+    {
+        "amount": 3200,
+        "category": "food",
+        "type": "expense",
+        "date": "2026-02-02"
+    },
+    {
+        "amount": 41898,
+        "category": "stipend",
+        "type": "income",
+        "date": "2026-02-12"
+    },
+    {
+        "amount": 3400,
+        "category": "health",
+        "type": "expense",
+        "date": "2026-02-14"
+    },
+    {
+        "amount": 500,
+        "category": "transport",
+        "type": "expense",
+        "date": "2026-02-18"
+    },
+    {
+        "amount": 15000,
+        "category": "food",
+        "type": "expense",
+        "date": "2026-02-23"
+    },
+    {
+        "amount": 3500,
+        "category": "entertainment",
+        "type": "expense",
+        "date": "2026-03-01"
+    },
+    {
+        "amount": 80000,
+        "category": "freelance",
+        "type": "income",
+        "date": "2026-03-05"
+    },
+    {
+        "amount": 1200,
+        "category": "other",
+        "type": "expense",
+        "date": "2026-03-10"
+    },
+    {
+        "amount": 950,
+        "category": "food",
+        "type": "expense",
+        "date": "2026-03-12"
+    },
+    {
+        "amount": 450,
+        "category": "transport",
+        "type": "expense",
+        "date": "2026-03-15"
+    }
+]
