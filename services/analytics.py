@@ -2,7 +2,7 @@ from models.account import Account
 from models.transactions import Expense, Income
 
 class FinanceAnalyzer:
-    def __init__(self, account):
+    def __init__(self, account: Account):
         self.__account = account
 
     def get_transactions(self):
