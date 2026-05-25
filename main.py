@@ -8,7 +8,7 @@ from models.transactions import Expense, Income
 from services import storage
 from services.analytics import FinanceAnalyzer
 from utils.decorators import log_execution
-from utils.validators import validate_transaction_payload
+from utils.validators import validate_amount, validate_transaction_payload
 
 DEFAULT_CATEGORY_LIMIT = 10_000
 
@@ -116,6 +116,50 @@ def show_overspending() -> None:
 
     print("Overspent categories:", ", ".join(overspent))
 
+@log_execution
+def show_large_expenses() -> None:
+    raw = input("Minimum amount for large expense: ").strip()
+    try:
+        threshold = float(validate_transaction_payload(
+            {"amount": raw, "category": "x", "type": "expense"}
+        )["amount"])
+    except ValueError as exc:
+        print(f"Validation error: {exc}")
+        return
+
+    analyzer = _analyzer()
+    large = analyzer.large_expenses(threshold)
+
+    if not large:
+        print(f"No expenses greater than {threshold}.")
+        return
+
+    for tx in large:
+        print(f"{tx.category.get_name()}: {tx.amount}")
+
+@log_execution
+def set_category_limit() -> None:
+    name = input("Category name: ").strip()
+    if not name:
+        print("Name cannot be empty.")
+        return
+
+    try:
+        limit = float(validate_amount(input("Spending limit: ").strip()))
+    except ValueError as exc:
+        print(f"Validation error: {exc}")
+        return
+
+    for cat in account.get_categories():
+        if cat.get_name().lower() == name.lower():
+            cat.set_limit(limit)
+            print(f"Limit for '{cat.get_name()}' set to {limit}")
+            return
+
+    category = Category(name, limit)
+    account.add_category(category)
+    print(f"Category '{name}' created with limit {limit}")
+
 
 def print_menu() -> None:
     print("\n=== Personal Finance CLI ===")
@@ -125,6 +169,8 @@ def print_menu() -> None:
     print("4) Monthly report (analytics)")
     print("5) Category breakdown (analytics)")
     print("6) Detect overspending (analytics)")
+    print("7) Large expenses (analytics)")
+    print("8) Set category limit")
     print("0) Exit")
 
 
@@ -136,6 +182,8 @@ def main() -> None:
         "4": show_monthly_report,
         "5": show_category_breakdown,
         "6": show_overspending,
+        "7": show_large_expenses,
+        "8": set_category_limit,
     }
 
     while True:
