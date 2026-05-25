@@ -27,7 +27,7 @@ class Account(Accountable):
 
     def add_transaction(self, transaction: Transaction):
         transaction.apply()
-        self.__transactions.append(Transaction)
+        self.__transactions.append(transaction)
 
     def get_categories(self):
         return self.__categories
