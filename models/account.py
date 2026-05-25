@@ -1,8 +1,9 @@
 from models.transactions import Transaction
 from models.categories import Category
+from models.interface import Accountable
 
 
-class Account:
+class Account(Accountable):
     def __init__(self, balance):
         self.__balance = balance
         self.__categories = []
