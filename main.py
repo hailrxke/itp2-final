@@ -7,13 +7,14 @@ from models.categories import Category
 from models.transactions import Expense, Income
 from services import storage
 from services.analytics import FinanceAnalyzer
+from services.storage import load_account_transactions
 from utils.decorators import log_execution
 from utils.validators import validate_amount, validate_transaction_payload
 
 DEFAULT_CATEGORY_LIMIT = 10_000
 
 account = Account(0)
-
+load_account_transactions(account)
 
 def _get_or_create_category(name: str) -> Category:
     for cat in account.get_categories():
