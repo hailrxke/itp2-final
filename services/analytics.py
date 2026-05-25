@@ -1,13 +1,14 @@
-from models.transactions import Transaction, Income, Expense
+from models.account import Account
+from models.transactions import Expense, Income
 
 class FinanceAnalyzer:
-    def __init__(self, transactions: list[Transaction]):
-        self.__transactions = transactions
+    def __init__(self, account):
+        self.__account = account
 
     def get_transactions(self):
-        return self.__transactions
-    def set_transactions(self, transactions):
-        self.__transactions = transactions
+        return self.__account.get_transactions()
+    def get_categories(self):
+        return self.__account.get_categories()
 
     
     #if there 100000 transactions regular function load all to memory, generator gives one month at time and doesn't store rest
@@ -33,3 +34,13 @@ class FinanceAnalyzer:
                     expenses[name] = 0
                 expenses[name] += t.amount
         return expenses
+    
+    def detect_overspending(self):
+        expenses = self.category_expenses()
+        result = []
+        for c in self.get_categories():
+            name = c.get_name()
+            if name in expenses:
+                if expenses[name] > c.get_limit():
+                    result.append(name)
+        return result
