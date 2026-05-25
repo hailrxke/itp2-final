@@ -15,7 +15,7 @@ class FinanceAnalyzer:
     def monthly_summary(self):
         monthes = {}
         for t in self.get_transactions():
-            month = t.date[:7]
+            month = t.date.strftime("%Y-%m")
             if month not in monthes:
                 monthes[month] = {"income": 0, "expenses": 0}
             if isinstance(t, Income):
@@ -44,3 +44,7 @@ class FinanceAnalyzer:
                 if expenses[name] > c.get_limit():
                     result.append(name)
         return result
+    
+    #you can find expenses that exceed a certain amount
+    def large_expenses(self, expense):
+        return list(filter(lambda t: isinstance(t, Expense) and t.amount > expense, self.get_transactions()))
