@@ -1,35 +1,43 @@
 # itp2-final        Personal Finance Tracker
 
 ## Participants:
-1. Bolat Mubarak - Models ('transaction.py', 'categories.py', 'accounts.py' and interface Accountable)
-2. Seitmukhambetov Alikhan - Analytic Block (Class Finance Analyzer with 'monthly_summary', 'category_expenses', 'detect_overspending', and 'large_expenses' methods), Tests for Finance Analyzer
-3. Yesenaliev Arystanali - Storage Block ('storage.py', 'transactions.json')
-4. Tselichshev Maxim - Utils Module ('@log_execution' decorator, 'validators.py')
+1. Bolat Mubarak - Models (`transaction.py`, `categories.py`, `accounts.py` and interface Accountable)
+2. Seitmukhambetov Alikhan - Analytic Block (Class Finance Analyzer with `monthly_summary`, `category_expenses`, `detect_overspending`, and `large_expenses` methods), Tests for Finance Analyzer
+3. Yesenaliev Arystanali - Storage Block (`storage.py`, `transactions.json`)
+4. Tselichshev Maxim - Utils Module (`@log_execution` decorator, `validators.py`), Main
 
 ## Project Structure:
+```
 itp2-final-1/
-├── main.py              # CLI Menu
+│
+├── data/
+│   └── transactions.json
+│
 ├── models/
 │   ├── account.py
 │   ├── categories.py
-│   ├── interface.py     # Accountable
-│   └── transactions.py  
+│   ├── interface.py       # Интерфейс Accountable
+│   └── transactions.py
+│
 ├── services/
-│   ├── storage.py       # JSON
-│   └── analytics.py     # FinanceAnalyzer
+│   ├── analytics.py       # Класс FinanceAnalyzer
+│   └── storage.py         # Работа с JSON
+│
+├── tests/
+│   ├── test_analytics.py
+│   └── test_validators.py
+│
 ├── utils/
-│   ├── validators.py    
-│   └── decorators.py    # @log_execution
-├── data/
-│   └── transactions.json
-└── tests/
-    ├── test_validators.py
-    └── test_analytics.py
-
+│   ├── decorators.py      # Декоратор @log_execution
+│   └── validators.py
+│
+└── main.py                # CLI Меню
+```
 ## Example of Program Execution
 
 
-'=== Personal Finance CLI ===
+```
+=== Personal Finance CLI ===
 1) Add transaction
 2) Show balance
 3) Show JSON records (storage)
@@ -226,3 +234,4 @@ food: 4500
 entertainment: 12000
 food: 15000
 [LOG] Done: show_large_expenses (3.3966s)'
+```
