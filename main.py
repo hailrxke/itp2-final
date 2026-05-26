@@ -1,7 +1,3 @@
-from __future__ import annotations
-
-from typing import Callable, Dict, Optional
-
 from models.account import Account
 from models.categories import Category
 from models.transactions import Expense, Income
@@ -16,7 +12,7 @@ DEFAULT_CATEGORY_LIMIT = 10_000
 account = Account(0)
 
 load_account_transactions(account)
-def _get_or_create_category(name: str) -> Category:
+def _get_or_create_category(name):
     categories = account.get_categories()
     if name in categories:
         return categories[name]
@@ -29,7 +25,7 @@ def _get_or_create_category(name: str) -> Category:
     return category
 
 
-def _build_transaction(data: dict):
+def _build_transaction(data):
     amount = data["amount"]
     tx_type = data["type"]
 
@@ -40,7 +36,7 @@ def _build_transaction(data: dict):
     return Expense(amount, category, account)
 
 
-def _read_transaction_input() -> dict:
+def _read_transaction_input():
     amount = input("Amount: ").strip()
     category = input("Category: ").strip()
     tx_type = input("Type (income/expense): ").strip()
@@ -57,7 +53,7 @@ def _analyzer() -> FinanceAnalyzer:
 
 
 @log_execution
-def add_transaction() -> None:
+def add_transaction():
     try:
         validated = validate_transaction_payload(_read_transaction_input())
         tx = _build_transaction(validated)
@@ -69,12 +65,12 @@ def add_transaction() -> None:
 
 
 @log_execution
-def show_balance() -> None:
+def show_balance():
     print(f"Current balance: {account.get_balance()}")
 
 
 @log_execution
-def show_json_records() -> None:
+def show_json_records():
     records = storage.load_raw_data()
     print(f"Records in JSON: {len(records)}")
     for item in records:
@@ -82,7 +78,7 @@ def show_json_records() -> None:
 
 
 @log_execution
-def show_monthly_report() -> None:
+def show_monthly_report():
     analyzer = _analyzer()
     rows = list(analyzer.monthly_summary())
 
@@ -98,7 +94,7 @@ def show_monthly_report() -> None:
 
 
 @log_execution
-def show_category_breakdown() -> None:
+def show_category_breakdown():
     analyzer = _analyzer()
     breakdown = analyzer.category_expenses()
 
@@ -111,7 +107,7 @@ def show_category_breakdown() -> None:
 
 
 @log_execution
-def show_overspending() -> None:
+def show_overspending():
     analyzer = _analyzer()
     overspent = analyzer.detect_overspending()
 
@@ -122,7 +118,7 @@ def show_overspending() -> None:
     print("Overspent categories:", ", ".join(overspent))
 
 @log_execution
-def show_large_expenses() -> None:
+def show_large_expenses():
     raw = input("Minimum amount for large expense: ").strip()
     try:
         threshold = float(validate_transaction_payload(
@@ -143,7 +139,7 @@ def show_large_expenses() -> None:
         print(f"{tx.category.get_name()}: {tx.amount}")
 
 @log_execution
-def set_category_limit() -> None:
+def set_category_limit():
     name = input("Category name: ").strip()
     if not name:
         print("Name cannot be empty.")
@@ -171,7 +167,7 @@ def set_category_limit() -> None:
     print(f"Category '{name}' created with limit {limit}")
 
 
-def print_menu() -> None:
+def print_menu():
     print("\n=== Personal Finance CLI ===")
     print("1) Add transaction")
     print("2) Show balance")
@@ -184,8 +180,8 @@ def print_menu() -> None:
     print("0) Exit")
 
 
-def main() -> None:
-    handlers: Dict[str, Callable[[], None]] = {
+def main():
+    actions = {
         "1": add_transaction,
         "2": show_balance,
         "3": show_json_records,
@@ -201,15 +197,14 @@ def main() -> None:
         choice = input("Choose action: ").strip()
 
         if choice == "0":
+            save_transaction(account)
             print("Bye!")
             break
 
-        handler: Optional[Callable[[], None]] = handlers.get(choice)
-        if handler is None:
+        if choice not in actions:
             print("Invalid choice. Try again.")
             continue
-
-        handler()
+        actions[choice]()
 
 
 if __name__ == "__main__":
