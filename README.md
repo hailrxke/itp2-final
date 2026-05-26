@@ -25,8 +25,10 @@ itp2-final-1/
 │
 ├── tests/
 │   ├── test_analytics.py
-│   └── test_validators.py
-│
+│   ├── test_validators.py
+|   ├── test_models.py
+│   └── test_storage.py
+|
 ├── utils/
 │   ├── decorators.py      # Декоратор @log_execution
 │   └── validators.py
