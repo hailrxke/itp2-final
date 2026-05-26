@@ -6,6 +6,9 @@
 3. Yesenaliev Arystanali - Storage Block (`storage.py`, `transactions.json`)
 4. Tselichshev Maxim - Utils Module (`@log_execution` decorator, `validators.py`), Main
 
+## Presentation
+https://canva.link/muas3s3tl6k6rvu
+
 ## Project Structure:
 ```
 itp2-final-1/

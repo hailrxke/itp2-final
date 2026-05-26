@@ -2,87 +2,92 @@
     {
         "amount": 41898,
         "type": "income",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 4500,
         "category": "food",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 90,
         "category": "transport",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 15000,
         "type": "income",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 12000,
         "category": "entertainment",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 3200,
         "category": "food",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 41898,
         "type": "income",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 3400,
         "category": "health",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 500,
         "category": "transport",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 15000,
         "category": "food",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 3500,
         "category": "entertainment",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 80000,
         "type": "income",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 1200,
         "category": "other",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 950,
         "category": "food",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
     },
     {
         "amount": 450,
         "category": "transport",
         "type": "expense",
-        "date": "2026-02-05/26/26"
+        "date": "2026-05-26"
+    },
+    {
+        "amount": 999.0,
+        "type": "income",
+        "date": "2026-05-26"
     }
 ]
