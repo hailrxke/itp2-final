@@ -26,7 +26,7 @@ def load_account_transactions(account: Account) -> None:
         account.add_category(Category(transaction.get('category'), 0))
         if transaction.get('type') == 'income':
             account.add_transaction(Income(transaction.get('amount'), account))
-        elif transaction.get('type') == 'expanse':
+        elif transaction.get('type') == 'expense':
             account.add_transaction(Expense(transaction.get('amount'), account.get_categories()[transaction.get('category')], account))
 
 

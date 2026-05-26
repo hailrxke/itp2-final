@@ -17,8 +17,11 @@ account = Account(0)
 
 load_account_transactions(account)
 def _get_or_create_category(name: str) -> Category:
-    for cat in account.get_categories():
-        if cat.get_name().lower() == name.lower():
+    categories = account.get_categories()
+    if name in categories:
+        return categories[name]
+    for key, cat in categories.items():
+        if key.lower() == name.lower():
             return cat
 
     category = Category(name, DEFAULT_CATEGORY_LIMIT)
@@ -151,8 +154,13 @@ def set_category_limit() -> None:
         print(f"Validation error: {exc}")
         return
 
-    for cat in account.get_categories():
-        if cat.get_name().lower() == name.lower():
+    categories = account.get_categories()
+    if name in categories:
+        categories[name].set_limit(limit)
+        print(f"Limit for '{categories[name].get_name()}' set to {limit}")
+        return
+    for key, cat in categories.items():
+        if key.lower() == name.lower():
             cat.set_limit(limit)
             print(f"Limit for '{cat.get_name()}' set to {limit}")
             return
