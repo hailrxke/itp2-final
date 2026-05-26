@@ -7,7 +7,7 @@ from models.interface import Accountable
 class Transaction(ABC):
     def __init__(self, amount, account: Accountable):
         self.amount = amount
-        self.date = datetime.now().strftime('%Y-%M-%D')
+        self.date = datetime.now().strftime('%Y-%m-%d')
         self.account = account
         if amount <= 0:
             raise ValueError(...)

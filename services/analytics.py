@@ -15,7 +15,7 @@ class FinanceAnalyzer:
     def monthly_summary(self):
         monthes = {}
         for t in self.get_transactions():
-            month = t.date.strftime("%Y-%m")
+            month = t.date[:7]
             if month not in monthes:
                 monthes[month] = {"income": 0, "expenses": 0}
             if isinstance(t, Income):
