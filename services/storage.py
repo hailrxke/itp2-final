@@ -1,11 +1,6 @@
 import json
 import os
 
-DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'transactions.json')
-
-import json
-import os
-
 from models.account import Account
 from models.categories import Category
 from models.transactions import Income, Expense
@@ -23,10 +18,25 @@ def load_raw_data() -> list:
 
 def load_account_transactions(account: Account) -> None:
     for transaction in load_raw_data():
-        account.add_category(Category(transaction.get('category'), 0))
         if transaction.get('type') == 'income':
             account.add_transaction(Income(transaction.get('amount'), account))
-        elif transaction.get('type') == 'expense':
+        else:
+            account.add_category(Category(transaction.get('category'), 0))
             account.add_transaction(Expense(transaction.get('amount'), account.get_categories()[transaction.get('category')], account))
 
-
+def save_transaction(account:Account) -> None:
+    new_transactions = []
+    for transaction in account.get_transactions():
+        name = transaction.get_name()
+        if name == 'income':
+            new_transaction = {'amount': transaction.amount,'type': name, 'date': transaction.date}
+        else:
+            new_transaction = {'amount': transaction.amount, 'category': transaction.category.get_name(),
+                                'type': name, 'date': transaction.date}
+        new_transactions.append(new_transaction)
+    with open(DB_PATH, 'w', encoding='utf-8') as f:
+        json.dump(new_transactions, f, indent=4, ensure_ascii=False)
+account = Account(0)
+load_account_transactions(account)
+save_transaction(account)
+print(account.get_categories().keys())

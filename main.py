@@ -7,7 +7,7 @@ from models.categories import Category
 from models.transactions import Expense, Income
 from services import storage
 from services.analytics import FinanceAnalyzer
-from services.storage import load_account_transactions
+from services.storage import load_account_transactions, save_transaction
 from utils.decorators import log_execution
 from utils.validators import validate_amount, validate_transaction_payload
 
@@ -63,6 +63,7 @@ def add_transaction() -> None:
         tx = _build_transaction(validated)
         account.add_transaction(tx)
         print(f"Transaction added. Balance: {account.get_balance()}")
+        save_transaction(account)
     except ValueError as exc:
         print(f"Validation error: {exc}")
 
