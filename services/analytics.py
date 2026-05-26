@@ -38,7 +38,7 @@ class FinanceAnalyzer:
     def detect_overspending(self):
         expenses = self.category_expenses()
         result = []
-        for c in self.get_categories():
+        for c in self.get_categories().values():
             name = c.get_name()
             if name in expenses:
                 if expenses[name] > c.get_limit():
