@@ -58,7 +58,7 @@ def validate_transaction_type(value: Any) -> str:
     return tx_type
 
 
-def validate_date(value: Any, fmt: str = "%Y-%M-%D") -> datetime:
+def validate_date(value: Any, fmt: str = "%Y-%m-%d") -> datetime:
     if not isinstance(value, str):
         raise ValueError("Date must be a string.")
 
