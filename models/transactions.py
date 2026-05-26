@@ -7,9 +7,9 @@ from models.interface import Accountable
 class Transaction(ABC):
     def __init__(self, amount, account: Accountable):
         self.amount = amount
-        self.date = datetime.now().strftime('%Y-%M-%D')
+        self.date = datetime.now().strftime('%Y-%m-%d')
         self.account = account
-        if amount < 0:
+        if amount <= 0:
             raise ValueError(...)
 
     @abstractmethod
@@ -32,11 +32,11 @@ class Expense(Transaction):
     def __init__(self, amount, category: Category, account: Accountable):
         super().__init__(amount, account)
         self.category = category
-        category.add_spent(amount)
         self.__name = 'expense'
 
     def apply(self):
         self.account.withdraw(self.amount)
+        self.category.add_spent(self.amount)
 
     def get_name(self):
         return self.__name

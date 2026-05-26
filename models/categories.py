@@ -22,3 +22,6 @@ class Category:
 
     def add_spent(self, amount):
         self.__spent += amount
+
+    def get_spent(self):
+        return self.__spent
